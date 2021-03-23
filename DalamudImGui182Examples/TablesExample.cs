@@ -7,10 +7,9 @@ using Dalamud.Plugin;
 using ImGuiNET;
 using ImGuiScene;
 using Lumina.Data.Structs.Excel;
-using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
 
-namespace NewDalamudImGuiExamples
+namespace DalamudImGui182Examples
 {
     public class TablesExample : IDisposable
     {

@@ -3,7 +3,7 @@ using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using ImGuiNET;
 
-namespace NewDalamudImGuiExamples
+namespace DalamudImGui182Examples
 {
     public class Examples : IDalamudPlugin
     {

@@ -3,7 +3,7 @@ using System.Numerics;
 using ImGuiNET;
 using ImGuizmoNET;
 
-namespace NewDalamudImGuiExamples
+namespace DalamudImGui182Examples
 {
     public class ImGuizmoExample
     {

@@ -7,7 +7,7 @@ using Dalamud.Plugin;
 using ImGuiNET;
 using imnodesNET;
 
-namespace NewDalamudImGuiExamples
+namespace DalamudImGui182Examples
 {
     struct Node
     {

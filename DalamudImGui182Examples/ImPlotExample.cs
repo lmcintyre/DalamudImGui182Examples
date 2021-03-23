@@ -3,7 +3,7 @@ using System.Numerics;
 using ImGuiNET;
 using ImPlotNET;
 
-namespace NewDalamudImGuiExamples
+namespace DalamudImGui182Examples
 {
     public class ImPlotExample : IDisposable
     {
@@ -55,7 +55,7 @@ namespace NewDalamudImGuiExamples
             ImPlot.SetNextPlotLimitsY(0,150f);
             if (ImPlot.BeginPlot("##Scrolling", "", "", new Vector2(-1,250), 0, ImPlotAxisFlags.NoTickLabels, ImPlotAxisFlags.NoTickLabels | ImPlotAxisFlags.NoGridLines))
             {
-                ImPlot.PlotShaded("FPSS", ref _buffer.Data[0].X, ref _buffer.Data[0].Y, _buffer.Size, 0, _buffer.Offset, 2 * sizeof(float));
+                ImPlot.PlotShaded("FPS", ref _buffer.Data[0].X, ref _buffer.Data[0].Y, _buffer.Size, 0, _buffer.Offset, 2 * sizeof(float));
                 ImPlot.EndPlot();
             }
             ImGui.End();
