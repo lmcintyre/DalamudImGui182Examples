@@ -1,0 +1,11 @@
+{
+  "Author": "perchbird",
+  "Name": "Dalamud ImGui Examples",
+  "InternalName": "NewDalamudImGuiExamples",
+  "AssemblyVersion": "1.0.0.0",
+  "Description": "Example plugin for new ImGui 1.82 features in Dalamud.",
+  "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/lmcintyre/NewDalamudImGuiExamples",
+  "DalamudApiLevel": 2,
+  "LoadPriority": 0
+}
