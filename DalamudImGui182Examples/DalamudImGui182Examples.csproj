@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <Company>perchbird</Company>
     <AssemblyTitle>NewDalamudImGuiExamples</AssemblyTitle>
     <Product>NewDalamudImGuiExamples</Product>
@@ -36,11 +36,11 @@
       <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\ImGuiScene.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Lumina, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Lumina">
       <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Lumina.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="Lumina.Excel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Lumina.Excel">
       <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Lumina.Excel.dll</HintPath>
       <Private>false</Private>
     </Reference>

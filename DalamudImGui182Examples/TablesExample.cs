@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Dalamud.Data.LuminaExtensions;
+using Dalamud.Utility;
 using Dalamud.Plugin;
 using ImGuiNET;
 using ImGuiScene;
+
 using Lumina.Data.Structs.Excel;
 using Lumina.Excel.GeneratedSheets;
 
@@ -33,7 +34,7 @@ namespace DalamudImGui182Examples
             foreach (var row in _sheet)
             {
                 if (row.Icon == 0) continue;
-                var tex = _pi.Data.GetIcon(_pi.ClientState.ClientLanguage, (int) row.Icon);
+                var tex = _pi.Data.GetIcon(_pi.ClientState.ClientLanguage, row.Icon);
                 _iconCache[row.Icon] = _pi.UiBuilder.LoadImageRaw(tex.GetRgbaImageData(), tex.Header.Width, tex.Header.Height, 4);
             }
         }

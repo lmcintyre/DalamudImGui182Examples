@@ -38,8 +38,8 @@ namespace DalamudImGui182Examples
             _imPlotExample = new ImPlotExample();
             _tablesExample = new TablesExample(pluginInterface);
 
-            _pi.UiBuilder.OnBuildUi += DrawUI;
-            _pi.UiBuilder.OnOpenConfigUi += (_, _) => DrawConfigUI();
+            _pi.UiBuilder.Draw += DrawUI;
+            _pi.UiBuilder.OpenConfigUi += (_, _) => DrawConfigUI();
         }
 
         public void Dispose()
