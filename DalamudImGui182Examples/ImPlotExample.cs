@@ -5,7 +5,7 @@ using ImPlotNET;
 
 namespace DalamudImGui182Examples
 {
-    public class ImPlotExample : IDisposable
+    public class ImPlotExample
     {
         struct ScrollingBuffer {
             public int MaxSize;
@@ -59,11 +59,6 @@ namespace DalamudImGui182Examples
                 ImPlot.EndPlot();
             }
             ImGui.End();
-        }
-
-        public void Dispose()
-        {
-            ImPlot.DestroyContext();
         }
     }
 }

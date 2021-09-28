@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
-using Dalamud.Game.Command;
+using Dalamud.Data;
+using Dalamud.Game.ClientState;
 using Dalamud.Plugin;
 using ImGuiNET;
 
@@ -9,50 +10,29 @@ namespace DalamudImGui182Examples
     {
         public string Name => "Dalamud ImGui Examples";
 
-        private const string CommandName = "/imguiexamples";
-
-        private DalamudPluginInterface _pi;
         private bool _visible = true;
 
         private bool _imguizmo;
-        private bool _imnode;
         private bool _implot;
         private bool _tables;
 
         private ImGuizmoExample _imGuizmoExample;
-        private ImNodeExample _imNodeExample;
         private ImPlotExample _imPlotExample;
         private TablesExample _tablesExample;
 
-        public void Initialize(DalamudPluginInterface pluginInterface)
+        public Examples(DataManager data, ClientState cs, DalamudPluginInterface pi)
         {
-            _pi = pluginInterface;
-
-            _pi.CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
-            {
-                HelpMessage = "Use /imguiexamples to open the UI."
-            });
-
             _imGuizmoExample = new ImGuizmoExample();
-            _imNodeExample = new ImNodeExample(pluginInterface);
             _imPlotExample = new ImPlotExample();
-            _tablesExample = new TablesExample(pluginInterface);
+            _tablesExample = new TablesExample(data, cs, pi);
 
-            _pi.UiBuilder.Draw += DrawUI;
-            _pi.UiBuilder.OpenConfigUi += (_, _) => DrawConfigUI();
+            pi.UiBuilder.Draw += DrawUI;
+            pi.UiBuilder.OpenConfigUi += (_, _) => DrawConfigUI();
         }
 
         public void Dispose()
         {
-            _imNodeExample.Dispose();
             _tablesExample.Dispose();
-
-            // Make sure your plot is not rendering when you destroy the context
-            _implot = false;
-            _imPlotExample.Dispose();
-            
-            _pi.CommandManager.RemoveHandler(CommandName);
-            _pi.Dispose();
         }
 
         private void OnCommand(string command, string args)
@@ -70,8 +50,6 @@ namespace DalamudImGui182Examples
             Draw();
             if (_imguizmo)
                 _imGuizmoExample.Render();
-            if (_imnode)
-                _imNodeExample.Render();
             if (_implot)
                 _imPlotExample.Render();
             if (_tables)
@@ -94,15 +72,6 @@ namespace DalamudImGui182Examples
             if (ImGui.RadioButton("ImGuizmo", _imguizmo))
             {
                 _imguizmo = true;
-                _imnode = false;
-                _implot = false;
-                _tables = false;
-            }
-
-            if (ImGui.RadioButton("ImNode", _imnode))
-            {
-                _imguizmo = false;
-                _imnode = true;
                 _implot = false;
                 _tables = false;
             }
@@ -110,7 +79,6 @@ namespace DalamudImGui182Examples
             if (ImGui.RadioButton("ImPlot", _implot))
             {
                 _imguizmo = false;
-                _imnode = false;
                 _implot = true;
                 _tables = false;
             }
@@ -118,7 +86,6 @@ namespace DalamudImGui182Examples
             if (ImGui.RadioButton("Tables", _tables))
             {
                 _imguizmo = false;
-                _imnode = false;
                 _implot = false;
                 _tables = true;
             }

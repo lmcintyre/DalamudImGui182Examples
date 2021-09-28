@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using Dalamud.Data;
+using Dalamud.Game.ClientState;
 using Dalamud.Utility;
 using Dalamud.Plugin;
 using ImGuiNET;
@@ -14,19 +16,15 @@ namespace DalamudImGui182Examples
 {
     public class TablesExample : IDisposable
     {
-        private DalamudPluginInterface _pi;
         private List<OnlineStatus> _sheet;
         private ExcelColumnDefinition[] _columnDefs;
         private int ColumnCount => _columnDefs.Length;
         private Dictionary<uint, TextureWrap> _iconCache;
         private string[] _columnNames = {"Unknown", "Unknown", "Priority", "Name", "Icon"};
         
-        public TablesExample(DalamudPluginInterface pluginInterface)
+        public TablesExample(DataManager dataManager, ClientState clientState, DalamudPluginInterface pi)
         {
-            _pi = pluginInterface;
-
-            var sheet = _pi.Data.Excel.GetSheet<OnlineStatus>();
-            
+            var sheet = dataManager.Excel.GetSheet<OnlineStatus>();
             _sheet = sheet.ToList();
             _columnDefs = sheet.Columns;
             _iconCache = new Dictionary<uint, TextureWrap>();
@@ -34,8 +32,8 @@ namespace DalamudImGui182Examples
             foreach (var row in _sheet)
             {
                 if (row.Icon == 0) continue;
-                var tex = _pi.Data.GetIcon(_pi.ClientState.ClientLanguage, row.Icon);
-                _iconCache[row.Icon] = _pi.UiBuilder.LoadImageRaw(tex.GetRgbaImageData(), tex.Header.Width, tex.Header.Height, 4);
+                var tex = dataManager.GetIcon(clientState.ClientLanguage, row.Icon);
+                _iconCache[row.Icon] = pi.UiBuilder.LoadImageRaw(tex.GetRgbaImageData(), tex.Header.Width, tex.Header.Height, 4);
             }
         }
 
