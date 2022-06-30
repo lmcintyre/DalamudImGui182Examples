@@ -372,6 +372,7 @@ namespace DalamudImGui182Examples
                     _lastUsing = matId;
                 }
             }
+            ImGui.End();
         }
     }
 }

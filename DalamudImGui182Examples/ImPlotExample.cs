@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using ImGuiNET;
+using ImGuizmoNET;
 using ImPlotNET;
 
 namespace DalamudImGui182Examples
@@ -34,7 +35,8 @@ namespace DalamudImGui182Examples
         private float _history = 10f;
         private float _time = 0f;
         private static ScrollingBuffer _buffer;
-        
+        private bool _showDemo = true;
+
         public ImPlotExample()
         {
             ImPlot.SetImGuiContext(ImGui.GetCurrentContext());
@@ -50,15 +52,21 @@ namespace DalamudImGui182Examples
             _buffer.AddPoint(_time, ImGui.GetIO().Framerate);
 
             ImGui.SliderFloat("History",ref _history,1,30,"%.1f s");
-
-            ImPlot.SetNextPlotLimitsX(_time - _history, _time, ImGuiCond.Always);
-            ImPlot.SetNextPlotLimitsY(0,150f);
-            if (ImPlot.BeginPlot("##Scrolling", "", "", new Vector2(-1,250), 0, ImPlotAxisFlags.NoTickLabels, ImPlotAxisFlags.NoTickLabels | ImPlotAxisFlags.NoGridLines))
+            
+            if (ImPlot.BeginPlot("##Scrolling", new Vector2(-1,250)))
             {
-                ImPlot.PlotShaded("FPS", ref _buffer.Data[0].X, ref _buffer.Data[0].Y, _buffer.Size, 0, _buffer.Offset, 2 * sizeof(float));
+                ImPlot.SetupAxes(null, null, ImPlotAxisFlags.NoTickLabels, ImPlotAxisFlags.NoTickLabels);
+                ImPlot.SetupAxisLimits(ImAxis.X1, _time - _history, _time, ImPlotCond.Always);
+                ImPlot.SetupAxisLimits(ImAxis.Y1, 0, 150f);
+                ImPlot.SetNextFillStyle(new Vector4(0, 0, 0, -1)); // This is IMPLOT_AUTO_COL, 
+                ImPlot.PlotShaded("FPS", ref _buffer.Data[0].X, ref _buffer.Data[0].Y, _buffer.Size, float.NegativeInfinity, 0, _buffer.Offset, 2 * sizeof(float));
                 ImPlot.EndPlot();
             }
+            ImGui.Checkbox("Show ImPlot demo window.", ref _showDemo);
             ImGui.End();
+            
+            if (_showDemo)
+                ImPlot.ShowDemoWindow(ref _showDemo);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace DalamudImGui182Examples
             _tablesExample = new TablesExample(data, cs, pi);
 
             pi.UiBuilder.Draw += DrawUI;
-            pi.UiBuilder.OpenConfigUi += (_, _) => DrawConfigUI();
+            pi.UiBuilder.OpenConfigUi += DrawConfigUI;
         }
 
         public void Dispose()
